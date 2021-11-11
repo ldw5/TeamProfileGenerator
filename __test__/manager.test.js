@@ -24,7 +24,7 @@ describe('manager',() =>{
         })
         describe('officeNumber',()=>{
             it('should return a phone number', ()=>{
-                const numberM = 'bdw4'
+                const numberM = '1234567'
                 const manWorker = new Manager('jordan','goat@yahoo.com','45','1234567')
                 expect(numberM).toEqual(manWorker.getOfficeNumber())
             })
