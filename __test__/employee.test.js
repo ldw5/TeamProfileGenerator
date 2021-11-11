@@ -19,7 +19,7 @@ describe('employee',() =>{
         it('should return an id number', ()=>{
             const id = '45'
             const worker = new Employee('jordan','goat@yahoo.com','45')
-            expect(id).toEqual(worker.getEmail())
+            expect(id).toEqual(worker.getId())
         })
         })    
-})
+});
