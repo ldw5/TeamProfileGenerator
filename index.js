@@ -31,11 +31,11 @@ function engQues (){
             answers.name,
             answers.id,
             answers.email);
-        engQues.push(engineer);
+        workRoster.push(engineer);
         return addAnother(answers.whatKind)
     })
 }; 
-function quesInfo (){
+function manInfo (){
     
     inquirer.prompt([{
         type:"input",
@@ -65,7 +65,7 @@ function quesInfo (){
             answers.id,
             answers.officeNumber,
             answers.email);
-        quesInfo.push(manager);
+        manInfo.push(manager);
         return addAnother(answers.whatKind)
     })
 };
