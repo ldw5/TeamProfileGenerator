@@ -7,7 +7,7 @@ const Intern = require('./lib/intern')
 
 // after bringing in the information above, I need to create empty object for data 
 // and create functions to begin asking questions
-workRoster = [];
+const workRoster = [];
 workId = [];
 const html = [];
 function engQues (){
@@ -32,7 +32,12 @@ function engQues (){
             answers.id,
             answers.email);
         workRoster.push(engineer);
-        return addAnother(answers.whatKind)
+        if (answers.answerAdd === true) {
+            engQues()
+        } else {
+            makeTeam();
+            console.log('team made!')
+        }
     })
 }; 
 function manInfo (){
