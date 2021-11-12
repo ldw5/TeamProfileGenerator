@@ -1,5 +1,6 @@
 # TeamProfileGenerator
 https://github.com/ldw5/TeamProfileGenerator
+https://watch.screencastify.com/v/AHV1sy9MK5979iLqFxKo
 # Description
 a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. 
 # Table of Contents

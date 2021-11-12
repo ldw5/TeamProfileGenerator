@@ -32,7 +32,7 @@ function engQues (){
             answers.id,
             answers.email);
         workRoster.push(engineer);
-        if (answers.answerAdd === true) {
+        if (answers.addAnswer === true) {
             engQues()
         } else {
             makeTeam();
@@ -70,8 +70,13 @@ function manInfo (){
             answers.id,
             answers.officeNumber,
             answers.email);
-        manInfo.push(manager);
-        return addAnother(answers.whatKind)
+        workRoster.push(manager);
+        if (answers.addAnswer === true) {
+            engQues()
+        } else {
+            makeTeam();
+            console.log('team made!')
+        }
     })
 };
 function intQues (){
@@ -91,8 +96,13 @@ function intQues (){
             answers.name,
             answers.id,
             answers.email);
-        intQues.push(intern);
-        return addAnother(answers.whatKind)
+        workRoster.push(intern);
+        if (answers.addAnswer === true) {
+            engQues()
+        } else {
+            makeTeam();
+            console.log('team made!')
+        }
     })
 }; 
 
