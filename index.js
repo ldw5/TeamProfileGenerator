@@ -9,12 +9,12 @@ const Intern = require('./lib/intern')
 // and create functions to begin asking questions
 const workRoster = [];
 workId = [];
-const html = [];
+
 function engQues (){
     
     inquirer.prompt([{
         type:"input",
-        name:"name",
+        name:"github",
         message:"What is engineer's github name?"
     },{
         type:"input",
@@ -96,7 +96,7 @@ function intQues (){
     })
 }; 
 
-// I need to create a team of employees
+// I need to create a team of employees to display to html
 let renderWorkers = roster => {
 
     let engEmployee = engineer => {
@@ -117,10 +117,10 @@ let renderWorkers = roster => {
     };
 
 
-    html.push(roster.filter(employee => employee.getRole() === 'engineer')
+    workRoster.push(roster.filter(employee => employee.getRole() === 'engineer')
     .map(engineer => engEmployee(engineer))
     .join(''));
-    return html.join("");
+    return workRoster.join("");
 }
 
 //I need to generate a page to display
