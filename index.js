@@ -15,101 +15,10 @@ const render = require("./src/roster");
 const workRoster = [];
 const workId = [];
 
-function engQues (){
+function start (){
+
     
-    inquirer.prompt([{
-        type:"input",
-        name:"github",
-        message:"What is engineer's github name?"
-    },{
-        type:"input",
-        name:"name",
-        message:"What is your engineer's name?"
-    },{
-        type:"list",
-        message:"Do you want to add more members?",
-        name:"options",
-        choices:["intern", "engineer","none"]
-    }
-    ]).then((answers)=>{
-        let engineer = new Engineer(
-            answers.name,
-            answers.id,
-            answers.email);
-        workRoster.push(engineer);
-        if (answers.addAnswer === true) {
-            engQues()
-        } else {
-            makeTeam();
-            console.log('team made!')
-        }
-    })
-}; 
-function manInfo (){
-    
-    inquirer.prompt([{
-        type:"input",
-        name:"name",
-        message:"What is your manager's name?"
-    },{
-        type:"input",
-        name:"id",
-        message:"What is your manager's Id?"
-    },{
-        type:"input",
-        name:"officeNumber",
-        message:"What is your manager's office number?"
-    },{
-        type:"input",
-        name:"email",
-        message:"What is your manager's email?"
-    },{
-        type:"list",
-        message:"Do you want to add more members?",
-        name:"options",
-        choices:["intern", "engineer","none"]
-    }
-    ]).then((answers)=>{
-        let manager = new Manager(
-            answers.name,
-            answers.id,
-            answers.officeNumber,
-            answers.email);
-        workRoster.push(manager);
-        if (answers.addAnswer === true) {
-            engQues()
-        } else {
-            makeTeam();
-            console.log('team made!')
-        }
-    })
-};
-function intQues (){
-    
-    inquirer.prompt([{
-        type:"input",
-        name:"name",
-        message:"What is intern's school name?"
-    },{
-        type:"list",
-        message:"Do you want to add more members?",
-        name:"options",
-        choices:["intern", "engineer","none"]
-    }
-    ]).then((answers)=>{
-        let intern = new Intern(
-            answers.name,
-            answers.id,
-            answers.email);
-        workRoster.push(intern);
-        if (answers.addAnswer === true) {
-            engQues()
-        } else {
-            makeTeam();
-            console.log('team made!')
-        }
-    })
-}; 
+}
 
 // I need to create a team of employees to display to html
 let renderWorkers = roster => {
