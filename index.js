@@ -15,112 +15,136 @@ const render = require("./src/roster");
 const workRoster = [];
 const workId = [];
 
-function start (){
-
-    
-}
-
-// I need to create a team of employees to display to html
-let renderWorkers = roster => {
-
-    let engEmployee = engineer => {
-        return `
-    <div class="card" style="width: 18rem;">
-            <div class="card-header">
-            <h2><i class="fas fa-glasses"></i>${manager.getName()}</h2>
-            <h3 class="card-header"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
-              
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">ID:${engineer.getId()}</li>
-              <li class="list-group-item">Email:<a href='mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-              <li class="list-group-item">Github:<a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
-            </ul>
-          </div>
-    `;
-    };
-
-    let manEmployee = manager => {
-        return `
-    <div class="card" style="width: 18rem;">
-            <div class="card-header">
-              <h2><i class="fas fa-glasses"></i>${manager.getName()}</h2>
-              <h3 class="card-header"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">ID:${manager.getId()}</li>
-              <li class="list-group-item">Email:<a href='mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-              <li class="list-group-item">Github:<a href="https://github.com/${manager.getGithub()}">${manager.getGithub()}</a></li>
-            </ul>
-          </div>
-    `;
-    };
-
-    let intEmployee = intern => {
-        return `
-    <div class="card" style="width: 18rem;">
-            <div class="card-header">
-              <h2><i class="fas fa-glasses"></i>${intern.getName()}</h2>
-              <h3 class="card-header"><i class="fas fa-mug-hot mr-2"></i>${intern.getRole()}</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">ID:${intern.getId()}</li>
-              <li class="list-group-item">Email:<a href='mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-              <li class="list-group-item">Github:<a href="https://github.com/${intern.getGithub()}">${intern.getGithub()}</a></li>
-              <li class="list-group-item">School: ${intern.getSchool()}</li>
-            </ul>
-          </div>
-    `;
-    };
 
 
-    const html = [];
+function start() {
 
-    html.push(roster
-        .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => engEmployee(engineer))
-        .join("")
-    );
-    html.push(roster
-        .filter(employee => employee.getRole() === "Manager")
-        .map(manager => manEmployee(manager))
-    );
-    html.push(roster
-        .filter(employee => employee.getRole() === "Intern")
-        .map(intern => intEmployee(intern))
-        .join("")
-    );
+    function manQues() {
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "managerName",
+          message: "What is the team manager's name?",
+        },
+        {
+          type: "input",
+          name: "managerId",
+          message: "What is the team manager's id?",
+        },
+        {
+          type: "input",
+          name: "managerEmail",
+          message: "What is the team manager's email?",
+        },
+        {
+          type: "input",
+          name: "managerOfficeNumber",
+          message: "What is the team manager's office number?",
+        }
+      ])
+        .then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+        workRoster.push(manager);
+        workId.push(answers.managerId);
+        createTeam();
+      });
+    }
+  
+    function createTeam() {
+      inquirer.prompt([
+        {
+          type: "list",
+          name: "memberChoice",
+          message: "Which type of team member would you like to add?",
+          choices: [
+            "Engineer",
+            "Intern",
+            "I don't want to add any more team members"
+          ]
+        }
+      ]).then(userChoice => {
+        switch (userChoice.memberChoice) {
+          case "Engineer":
+            addEngineer();
+            break;
+          case "Intern":
+            addIntern();
+            break;
+          default:
+            buildTeam();
+        }
+      });
+    }
+  
+    function addEngineer() {
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "engineerName",
+          message: "What is your engineer's name?",
+        },
+        {
+          type: "input",
+          name: "engineerId",
+          message: "What is your engineer's id?",
+        },
+        {
+          type: "input",
+          name: "engineerEmail",
+          message: "What is your engineer's email?",
+        },
+        {
+          type: "input",
+          name: "engineerGithub",
+          message: "What is your engineer's GitHub username?",
+        }
+      ]).then(answers => {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+        workRoster.push(engineer);
+        workId.push(answers.engineerId);
+        createTeam();
+      });
+    }
+  
+    function addIntern() {
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "internName",
+          message: "What is your intern's name?",
+        },
+        {
+          type: "input",
+          name: "internId",
+          message: "What is your intern's id?",
+        },
+        {
+          type: "input",
+          name: "internEmail",
+          message: "What is your intern's email?",
+        },
+        {
+          type: "input",
+          name: "internSchool",
+          message: "What is your intern's school?",
+        }
+      ]).then(answers => {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        workRoster.push(intern);
+        workId.push(answers.internId);
+        createTeam();
+      });
+    }
+  
+    function buildTeam() {
+      // Create the output directory if the output path doesn't exist
+      if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
+      }
+      fs.writeFileSync(outputPath, render(workRoster), "utf-8");
+    }
+  
+    createManager();
+  }
+  start();
 
-    return html.join("");
-
-
-    
-}
-
-//I need to generate a page to display
-
-module.exports = roster => {
-    return `
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Team</title>
-</head>
-<body>
-    <header class="bg-dark">
-        <h1>My Team</h1>
-    </header>
-    <Main>
-    ${renderWorkers(roster)}
-    </Main>
-</body>
-</html>
-    `;
-};
-
-
-engQues();
