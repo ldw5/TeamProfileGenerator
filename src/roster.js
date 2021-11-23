@@ -5,8 +5,8 @@ let renderWorkers = roster => {
         return `
     <div class="card" style="width: 18rem;">
             <div class="card-header">
-            <h2><i class="fas fa-glasses"></i>${manager.getName()}</h2>
-            <h3 class="card-header"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
+            <h2><i class="fas fa-glasses"></i>${engineer.getName()}</h2>
+            <h3 class="card-header"><i class="fas fa-mug-hot mr-2"></i>${engineer.getRole()}</h3>
               
             </div>
             <ul class="list-group list-group-flush">
