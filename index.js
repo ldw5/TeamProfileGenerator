@@ -144,7 +144,7 @@ function start() {
       fs.writeFileSync(outputPath, render(workRoster), "utf-8");
     }
   
-    createManager();
+    manQues();
   }
   start();
 
